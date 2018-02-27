@@ -4,6 +4,7 @@ pipeline {
     ACRUSERNAME = credentials('ACRUSERNAME')
     ACRPASSWORD = credentials('ACRPASSWORD')
     ACRTENANT = credentials('ACRTENANT')
+    CI = 'true'
   }
   stages {
     stage('Clean Workspace') {
@@ -62,8 +63,5 @@ pipeline {
         sh 'docker push registry20171221043416.azurecr.io/code4clouds/react-boilerplate:1.0'
       }
     }
-  }
-  environment {
-    CI = 'true'
   }
 }
