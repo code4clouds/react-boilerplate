@@ -51,22 +51,18 @@ pipeline {
       environment {
         ACRUSERNAME = credentials('ACRUSERNAME')
         ACRPASSWORD = credentials('ACRPASSWORD')
-        ACRTENANT = credentials('ACRTENANT')      
       }
       steps {
         sh 'az --version'
         sh 'docker build --tag registry20171221043416.azurecr.io/code4clouds/react-boilerplate:1.0 .'
-        sh 'az login --service-principal --username $ACRUSERNAME --password $ACRPASSWORD --tenant $ACRTENANT --allow-no-subscription'
-        sh '''az acr login --name registry20171221043416
-'''
-        sh 'docker push registry20171221043416.azurecr.io/code4clouds/react-boilerplate:1.0'
+        sh '''
+docker login registry20171221043416.azurecr.io --username $ACRUSERNAME --password $ACRPASSWORD'''
+        sh '''
+docker push registry20171221043416.azurecr.io/code4clouds/react-boilerplate:1.0'''
       }
     }
   }
   environment {
-    ACRUSERNAME = credentials('ACRUSERNAME')
-    ACRPASSWORD = credentials('ACRPASSWORD')
-    ACRTENANT = credentials('ACRTENANT')
     CI = 'true'
   }
 }
