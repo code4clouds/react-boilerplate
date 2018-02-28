@@ -31,18 +31,6 @@ pipeline {
     stage('Deploy to Azure') {
       agent {
         docker {
-          image 'microsoft/azure-cli'
-          args '-u root'
-        }
-        
-      }
-      steps {
-        sh 'az --version'
-      }
-    }
-    stage('az-dind') {
-      agent {
-        docker {
           image 'davevoyles/dind-azurecli'
           args '--privileged  -u root -v /var/run/docker.sock:/var/run/docker.sock '
         }
