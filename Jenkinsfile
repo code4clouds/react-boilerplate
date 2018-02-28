@@ -44,7 +44,7 @@ pipeline {
       agent {
         docker {
           image 'davevoyles/dind-azurecli'
-          args '--privileged  -u root'
+          args '--privileged  -u root -v /var/run/docker.sock:/var/run/docker.sock '
         }
         
       }
